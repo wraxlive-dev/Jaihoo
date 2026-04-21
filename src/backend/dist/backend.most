@@ -1,0 +1,87 @@
+// Version: 1.0.0
+type CaseStudy__1000544958 =
+  {
+    clientName : Text;
+    description : Text;
+    industry : Text;
+    metrics : [(Text, Text)]
+  };
+type ContactForm__776882898 =
+  {
+    company : Text;
+    email : Text;
+    message : Text;
+    name : Text;
+    timestamp : Int
+  };
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type FAQItem__831604858 = {answer : Text; question : Text};
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type MembershipSubscription__473131756 =
+  {
+    email : Text;
+    name : Text;
+    phone : Text;
+    plan : Text;
+    status : Text;
+    tier : Text;
+    timestamp : Int
+  };
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type PricingPlan__337616044 =
+  {features : [Text]; isFeatured : Bool; name : Text; price : Int};
+type Service__311281967 =
+  {category : Text; description : Text; icon : Text; title : Text};
+type TeamMember__720132507 = {bio : Text; name : Text; role : Text};
+type Testimonial__393323594 =
+  {author : Text; company : Text; quote : Text; rating : Int; role : Text};
+actor {
+  stable caseStudies :
+    {
+      var root : Node__46230540<Int, CaseStudy__1000544958>;
+      var size : Nat__490723111
+    };
+  stable contacts :
+    {
+      var root : Node__46230540<Int, ContactForm__776882898>;
+      var size : Nat__490723111
+    };
+  stable faqs :
+    {
+      var root : Node__46230540<Int, FAQItem__831604858>;
+      var size : Nat__490723111
+    };
+  stable memberships :
+    {
+      var root : Node__46230540<Int, MembershipSubscription__473131756>;
+      var size : Nat__490723111
+    };
+  stable var nextContactId : Nat;
+  stable var nextMembershipId : Nat;
+  stable pricingPlans :
+    {
+      var root : Node__46230540<Int, PricingPlan__337616044>;
+      var size : Nat__490723111
+    };
+  stable services :
+    {
+      var root : Node__46230540<Int, Service__311281967>;
+      var size : Nat__490723111
+    };
+  stable teamMembers :
+    {
+      var root : Node__46230540<Int, TeamMember__720132507>;
+      var size : Nat__490723111
+    };
+  stable testimonials :
+    {
+      var root : Node__46230540<Int, Testimonial__393323594>;
+      var size : Nat__490723111
+    }
+};

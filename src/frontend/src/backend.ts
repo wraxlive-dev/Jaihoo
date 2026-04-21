@@ -119,6 +119,15 @@ export interface PricingPlan {
     isFeatured: boolean;
     price: bigint;
 }
+export interface MembershipSubscription {
+    status: string;
+    name: string;
+    plan: string;
+    tier: string;
+    email: string;
+    timestamp: bigint;
+    phone: string;
+}
 export interface FAQItem {
     question: string;
     answer: string;
@@ -145,12 +154,15 @@ export interface backendInterface {
     deleteTestimonial(id: bigint): Promise<void>;
     getCaseStudies(): Promise<Array<CaseStudy>>;
     getFAQs(): Promise<Array<FAQItem>>;
+    getMembershipByEmail(email: string): Promise<MembershipSubscription | null>;
+    getMembershipSubscriptions(): Promise<Array<MembershipSubscription>>;
     getPricingPlans(): Promise<Array<PricingPlan>>;
     getServices(): Promise<Array<Service>>;
     getTeamMembers(): Promise<Array<TeamMember>>;
     getTestimonials(): Promise<Array<Testimonial>>;
     initialize(): Promise<void>;
     submitContactForm(form: ContactForm): Promise<bigint>;
+    subscribeMembership(sub: MembershipSubscription): Promise<bigint>;
     updateCaseStudy(id: bigint, study: CaseStudy): Promise<void>;
     updateFAQ(id: bigint, faq: FAQItem): Promise<void>;
     updatePricingPlan(id: bigint, plan: PricingPlan): Promise<void>;
@@ -158,6 +170,7 @@ export interface backendInterface {
     updateTeamMember(id: bigint, member: TeamMember): Promise<void>;
     updateTestimonial(id: bigint, testimonial: Testimonial): Promise<void>;
 }
+import type { MembershipSubscription as _MembershipSubscription } from "./declarations/backend.did.d.ts";
 export class Backend implements backendInterface {
     constructor(private actor: ActorSubclass<_SERVICE>, private _uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, private _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, private processError?: (error: unknown) => never){}
     async addCaseStudy(arg0: CaseStudy): Promise<bigint> {
@@ -356,6 +369,34 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async getMembershipByEmail(arg0: string): Promise<MembershipSubscription | null> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getMembershipByEmail(arg0);
+                return from_candid_opt_n1(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getMembershipByEmail(arg0);
+            return from_candid_opt_n1(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getMembershipSubscriptions(): Promise<Array<MembershipSubscription>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getMembershipSubscriptions();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getMembershipSubscriptions();
+            return result;
+        }
+    }
     async getPricingPlans(): Promise<Array<PricingPlan>> {
         if (this.processError) {
             try {
@@ -437,6 +478,20 @@ export class Backend implements backendInterface {
             }
         } else {
             const result = await this.actor.submitContactForm(arg0);
+            return result;
+        }
+    }
+    async subscribeMembership(arg0: MembershipSubscription): Promise<bigint> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.subscribeMembership(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.subscribeMembership(arg0);
             return result;
         }
     }
@@ -524,6 +579,9 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+}
+function from_candid_opt_n1(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_MembershipSubscription]): MembershipSubscription | null {
+    return value.length === 0 ? null : value[0];
 }
 export interface CreateActorOptions {
     agent?: Agent;

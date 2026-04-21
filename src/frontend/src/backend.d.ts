@@ -37,6 +37,15 @@ export interface PricingPlan {
     isFeatured: boolean;
     price: bigint;
 }
+export interface MembershipSubscription {
+    status: string;
+    name: string;
+    plan: string;
+    tier: string;
+    email: string;
+    timestamp: bigint;
+    phone: string;
+}
 export interface FAQItem {
     question: string;
     answer: string;
@@ -63,12 +72,15 @@ export interface backendInterface {
     deleteTestimonial(id: bigint): Promise<void>;
     getCaseStudies(): Promise<Array<CaseStudy>>;
     getFAQs(): Promise<Array<FAQItem>>;
+    getMembershipByEmail(email: string): Promise<MembershipSubscription | null>;
+    getMembershipSubscriptions(): Promise<Array<MembershipSubscription>>;
     getPricingPlans(): Promise<Array<PricingPlan>>;
     getServices(): Promise<Array<Service>>;
     getTeamMembers(): Promise<Array<TeamMember>>;
     getTestimonials(): Promise<Array<Testimonial>>;
     initialize(): Promise<void>;
     submitContactForm(form: ContactForm): Promise<bigint>;
+    subscribeMembership(sub: MembershipSubscription): Promise<bigint>;
     updateCaseStudy(id: bigint, study: CaseStudy): Promise<void>;
     updateFAQ(id: bigint, faq: FAQItem): Promise<void>;
     updatePricingPlan(id: bigint, plan: PricingPlan): Promise<void>;

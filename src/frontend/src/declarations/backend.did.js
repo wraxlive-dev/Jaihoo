@@ -42,6 +42,15 @@ export const Testimonial = IDL.Record({
   'company' : IDL.Text,
   'rating' : IDL.Int,
 });
+export const MembershipSubscription = IDL.Record({
+  'status' : IDL.Text,
+  'name' : IDL.Text,
+  'plan' : IDL.Text,
+  'tier' : IDL.Text,
+  'email' : IDL.Text,
+  'timestamp' : IDL.Int,
+  'phone' : IDL.Text,
+});
 export const ContactForm = IDL.Record({
   'name' : IDL.Text,
   'email' : IDL.Text,
@@ -65,12 +74,23 @@ export const idlService = IDL.Service({
   'deleteTestimonial' : IDL.Func([IDL.Int], [], []),
   'getCaseStudies' : IDL.Func([], [IDL.Vec(CaseStudy)], ['query']),
   'getFAQs' : IDL.Func([], [IDL.Vec(FAQItem)], ['query']),
+  'getMembershipByEmail' : IDL.Func(
+      [IDL.Text],
+      [IDL.Opt(MembershipSubscription)],
+      ['query'],
+    ),
+  'getMembershipSubscriptions' : IDL.Func(
+      [],
+      [IDL.Vec(MembershipSubscription)],
+      ['query'],
+    ),
   'getPricingPlans' : IDL.Func([], [IDL.Vec(PricingPlan)], ['query']),
   'getServices' : IDL.Func([], [IDL.Vec(Service)], ['query']),
   'getTeamMembers' : IDL.Func([], [IDL.Vec(TeamMember)], ['query']),
   'getTestimonials' : IDL.Func([], [IDL.Vec(Testimonial)], ['query']),
   'initialize' : IDL.Func([], [], []),
   'submitContactForm' : IDL.Func([ContactForm], [IDL.Int], []),
+  'subscribeMembership' : IDL.Func([MembershipSubscription], [IDL.Int], []),
   'updateCaseStudy' : IDL.Func([IDL.Int, CaseStudy], [], []),
   'updateFAQ' : IDL.Func([IDL.Int, FAQItem], [], []),
   'updatePricingPlan' : IDL.Func([IDL.Int, PricingPlan], [], []),
@@ -113,6 +133,15 @@ export const idlFactory = ({ IDL }) => {
     'company' : IDL.Text,
     'rating' : IDL.Int,
   });
+  const MembershipSubscription = IDL.Record({
+    'status' : IDL.Text,
+    'name' : IDL.Text,
+    'plan' : IDL.Text,
+    'tier' : IDL.Text,
+    'email' : IDL.Text,
+    'timestamp' : IDL.Int,
+    'phone' : IDL.Text,
+  });
   const ContactForm = IDL.Record({
     'name' : IDL.Text,
     'email' : IDL.Text,
@@ -136,12 +165,23 @@ export const idlFactory = ({ IDL }) => {
     'deleteTestimonial' : IDL.Func([IDL.Int], [], []),
     'getCaseStudies' : IDL.Func([], [IDL.Vec(CaseStudy)], ['query']),
     'getFAQs' : IDL.Func([], [IDL.Vec(FAQItem)], ['query']),
+    'getMembershipByEmail' : IDL.Func(
+        [IDL.Text],
+        [IDL.Opt(MembershipSubscription)],
+        ['query'],
+      ),
+    'getMembershipSubscriptions' : IDL.Func(
+        [],
+        [IDL.Vec(MembershipSubscription)],
+        ['query'],
+      ),
     'getPricingPlans' : IDL.Func([], [IDL.Vec(PricingPlan)], ['query']),
     'getServices' : IDL.Func([], [IDL.Vec(Service)], ['query']),
     'getTeamMembers' : IDL.Func([], [IDL.Vec(TeamMember)], ['query']),
     'getTestimonials' : IDL.Func([], [IDL.Vec(Testimonial)], ['query']),
     'initialize' : IDL.Func([], [], []),
     'submitContactForm' : IDL.Func([ContactForm], [IDL.Int], []),
+    'subscribeMembership' : IDL.Func([MembershipSubscription], [IDL.Int], []),
     'updateCaseStudy' : IDL.Func([IDL.Int, CaseStudy], [], []),
     'updateFAQ' : IDL.Func([IDL.Int, FAQItem], [], []),
     'updatePricingPlan' : IDL.Func([IDL.Int, PricingPlan], [], []),

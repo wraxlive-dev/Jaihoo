@@ -24,6 +24,15 @@ export interface ContactForm {
   'timestamp' : bigint,
 }
 export interface FAQItem { 'question' : string, 'answer' : string }
+export interface MembershipSubscription {
+  'status' : string,
+  'name' : string,
+  'plan' : string,
+  'tier' : string,
+  'email' : string,
+  'timestamp' : bigint,
+  'phone' : string,
+}
 export interface PricingPlan {
   'features' : Array<string>,
   'name' : string,
@@ -59,12 +68,15 @@ export interface _SERVICE {
   'deleteTestimonial' : ActorMethod<[bigint], undefined>,
   'getCaseStudies' : ActorMethod<[], Array<CaseStudy>>,
   'getFAQs' : ActorMethod<[], Array<FAQItem>>,
+  'getMembershipByEmail' : ActorMethod<[string], [] | [MembershipSubscription]>,
+  'getMembershipSubscriptions' : ActorMethod<[], Array<MembershipSubscription>>,
   'getPricingPlans' : ActorMethod<[], Array<PricingPlan>>,
   'getServices' : ActorMethod<[], Array<Service>>,
   'getTeamMembers' : ActorMethod<[], Array<TeamMember>>,
   'getTestimonials' : ActorMethod<[], Array<Testimonial>>,
   'initialize' : ActorMethod<[], undefined>,
   'submitContactForm' : ActorMethod<[ContactForm], bigint>,
+  'subscribeMembership' : ActorMethod<[MembershipSubscription], bigint>,
   'updateCaseStudy' : ActorMethod<[bigint, CaseStudy], undefined>,
   'updateFAQ' : ActorMethod<[bigint, FAQItem], undefined>,
   'updatePricingPlan' : ActorMethod<[bigint, PricingPlan], undefined>,

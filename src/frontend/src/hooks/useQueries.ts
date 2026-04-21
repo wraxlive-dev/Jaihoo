@@ -1,9 +1,10 @@
+import { useActor } from "@caffeineai/core-infrastructure";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { createActor } from "../backend";
 import type { ContactForm } from "../backend.d";
-import { useActor } from "./useActor";
 
 export function useInitialize() {
-  const { actor, isFetching } = useActor();
+  const { actor, isFetching } = useActor(createActor);
   return useQuery({
     queryKey: ["initialize"],
     queryFn: async () => {
@@ -17,7 +18,7 @@ export function useInitialize() {
 }
 
 export function useServices() {
-  const { actor, isFetching } = useActor();
+  const { actor, isFetching } = useActor(createActor);
   return useQuery({
     queryKey: ["services"],
     queryFn: async () => {
@@ -29,7 +30,7 @@ export function useServices() {
 }
 
 export function usePricingPlans() {
-  const { actor, isFetching } = useActor();
+  const { actor, isFetching } = useActor(createActor);
   return useQuery({
     queryKey: ["pricingPlans"],
     queryFn: async () => {
@@ -41,7 +42,7 @@ export function usePricingPlans() {
 }
 
 export function useCaseStudies() {
-  const { actor, isFetching } = useActor();
+  const { actor, isFetching } = useActor(createActor);
   return useQuery({
     queryKey: ["caseStudies"],
     queryFn: async () => {
@@ -53,7 +54,7 @@ export function useCaseStudies() {
 }
 
 export function useTestimonials() {
-  const { actor, isFetching } = useActor();
+  const { actor, isFetching } = useActor(createActor);
   return useQuery({
     queryKey: ["testimonials"],
     queryFn: async () => {
@@ -65,7 +66,7 @@ export function useTestimonials() {
 }
 
 export function useTeamMembers() {
-  const { actor, isFetching } = useActor();
+  const { actor, isFetching } = useActor(createActor);
   return useQuery({
     queryKey: ["teamMembers"],
     queryFn: async () => {
@@ -77,7 +78,7 @@ export function useTeamMembers() {
 }
 
 export function useFAQs() {
-  const { actor, isFetching } = useActor();
+  const { actor, isFetching } = useActor(createActor);
   return useQuery({
     queryKey: ["faqs"],
     queryFn: async () => {
@@ -89,7 +90,7 @@ export function useFAQs() {
 }
 
 export function useSubmitContactForm() {
-  const { actor } = useActor();
+  const { actor } = useActor(createActor);
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (form: Omit<ContactForm, "timestamp">) => {

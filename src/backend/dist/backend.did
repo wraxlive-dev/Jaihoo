@@ -1,0 +1,92 @@
+type Testimonial = 
+ record {
+   author: text;
+   company: text;
+   quote: text;
+   rating: int;
+   role: text;
+ };
+type TeamMember = 
+ record {
+   bio: text;
+   name: text;
+   role: text;
+ };
+type Service = 
+ record {
+   category: text;
+   description: text;
+   icon: text;
+   title: text;
+ };
+type PricingPlan = 
+ record {
+   features: vec text;
+   isFeatured: bool;
+   name: text;
+   price: int;
+ };
+type MembershipSubscription = 
+ record {
+   email: text;
+   name: text;
+   phone: text;
+   plan: text;
+   status: text;
+   tier: text;
+   timestamp: int;
+ };
+type FAQItem = 
+ record {
+   answer: text;
+   question: text;
+ };
+type ContactForm = 
+ record {
+   company: text;
+   email: text;
+   message: text;
+   name: text;
+   timestamp: int;
+ };
+type CaseStudy = 
+ record {
+   clientName: text;
+   description: text;
+   industry: text;
+   metrics: vec record {
+                  text;
+                  text;
+                };
+ };
+service : {
+  addCaseStudy: (study: CaseStudy) -> (int);
+  addFAQ: (faq: FAQItem) -> (int);
+  addPricingPlan: (plan: PricingPlan) -> (int);
+  addService: ("service": Service) -> (int);
+  addTeamMember: (member: TeamMember) -> (int);
+  addTestimonial: (testimonial: Testimonial) -> (int);
+  deleteCaseStudy: (id: int) -> ();
+  deleteFAQ: (id: int) -> ();
+  deletePricingPlan: (id: int) -> ();
+  deleteService: (id: int) -> ();
+  deleteTeamMember: (id: int) -> ();
+  deleteTestimonial: (id: int) -> ();
+  getCaseStudies: () -> (vec CaseStudy) query;
+  getFAQs: () -> (vec FAQItem) query;
+  getMembershipByEmail: (email: text) -> (opt MembershipSubscription) query;
+  getMembershipSubscriptions: () -> (vec MembershipSubscription) query;
+  getPricingPlans: () -> (vec PricingPlan) query;
+  getServices: () -> (vec Service) query;
+  getTeamMembers: () -> (vec TeamMember) query;
+  getTestimonials: () -> (vec Testimonial) query;
+  initialize: () -> ();
+  submitContactForm: (form: ContactForm) -> (int);
+  subscribeMembership: (sub: MembershipSubscription) -> (int);
+  updateCaseStudy: (id: int, study: CaseStudy) -> ();
+  updateFAQ: (id: int, faq: FAQItem) -> ();
+  updatePricingPlan: (id: int, plan: PricingPlan) -> ();
+  updateService: (id: int, "service": Service) -> ();
+  updateTeamMember: (id: int, member: TeamMember) -> ();
+  updateTestimonial: (id: int, testimonial: Testimonial) -> ();
+}

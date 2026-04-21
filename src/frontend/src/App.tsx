@@ -13,6 +13,7 @@ import Services from "./components/Services";
 import Stats from "./components/Stats";
 import Team from "./components/Team";
 import Testimonials from "./components/Testimonials";
+import WhatsAppButton from "./components/WhatsAppButton";
 import WhySubscription from "./components/WhySubscription";
 import { CartProvider } from "./context/CartContext";
 import { useInitialize } from "./hooks/useQueries";
@@ -40,6 +41,7 @@ function AppContent() {
       <Footer />
       <Toaster />
       <CartDrawer />
+      <WhatsAppButton />
     </div>
   );
 }

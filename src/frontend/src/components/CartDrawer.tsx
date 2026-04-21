@@ -2,10 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useActor } from "@/hooks/useActor";
+import { useActor } from "@caffeineai/core-infrastructure";
 import { CheckCircle2, Loader2, ShoppingCart, Trash2, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
+import { createActor } from "../backend";
 import { useCart } from "../context/CartContext";
 
 export default function CartDrawer() {
@@ -14,7 +15,7 @@ export default function CartDrawer() {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const { selectedServices, toggleService, clearCart, cartCount } = useCart();
-  const { actor } = useActor();
+  const { actor } = useActor(createActor);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

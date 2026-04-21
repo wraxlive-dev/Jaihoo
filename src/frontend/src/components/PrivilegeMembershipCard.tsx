@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useActor } from "@/hooks/useActor";
+import { useActor } from "@caffeineai/core-infrastructure";
 import {
   CheckCircle2,
   CreditCard,
@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
+import { createActor } from "../backend";
 
 type Tier = "Silver" | "Gold" | "Platinum";
 type Plan = "monthly" | "yearly";
@@ -162,7 +163,7 @@ export default function PrivilegeMembershipCard() {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const { actor } = useActor();
+  const { actor } = useActor(createActor);
 
   const handleOpenDialog = (tier: Tier) => {
     setSelectedTier(tier);

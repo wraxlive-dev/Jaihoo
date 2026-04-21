@@ -1,0 +1,102 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 9% 0.015 240;
+    --foreground: 100% 0 0;
+    --card: 12% 0.015 240;
+    --card-foreground: 100% 0 0;
+    --popover: 12% 0.015 240;
+    --popover-foreground: 100% 0 0;
+    --primary: 55% 0.22 260;
+    --primary-foreground: 100% 0 0;
+    --secondary: 15% 0.015 240;
+    --secondary-foreground: 72% 0.015 240;
+    --muted: 18% 0.015 240;
+    --muted-foreground: 72% 0.015 240;
+    --accent: 43% 0.22 280;
+    --accent-foreground: 100% 0 0;
+    --destructive: 50% 0.25 25;
+    --destructive-foreground: 100% 0 0;
+    --border: 20% 0.015 240;
+    --input: 20% 0.015 240;
+    --ring: 55% 0.22 260;
+    --radius: 0.75rem;
+    --chart-1: 55% 0.22 260;
+    --chart-2: 43% 0.22 280;
+    --chart-3: 63% 0.18 222;
+    --chart-4: 65% 0.18 150;
+    --chart-5: 60% 0.2 30;
+
+    /* Custom brand tokens */
+    --brand-blue: 55% 0.22 260;
+    --brand-blue-light: 63% 0.18 222;
+    --brand-purple: 43% 0.22 280;
+    --brand-purple-dark: 47% 0.2 290;
+    --surface-1: 12% 0.015 240;
+    --surface-2: 15% 0.015 240;
+    --surface-3: 18% 0.015 240;
+    --text-muted: 72% 0.015 240;
+    --text-subtle: 55% 0.015 240;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Inter", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .gradient-blue {
+    background: linear-gradient(
+      135deg,
+      oklch(var(--brand-blue)),
+      oklch(var(--brand-blue-light))
+    );
+  }
+  .gradient-blue-purple {
+    background: linear-gradient(
+      135deg,
+      oklch(var(--brand-purple)),
+      oklch(var(--brand-blue))
+    );
+  }
+  .glow-blue {
+    box-shadow: 0 0 40px oklch(var(--brand-blue) / 0.3);
+  }
+  .glow-purple {
+    box-shadow: 0 0 40px oklch(var(--brand-purple) / 0.35);
+  }
+  .text-gradient-blue {
+    background: linear-gradient(
+      135deg,
+      oklch(var(--brand-blue)),
+      oklch(var(--brand-blue-light))
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .border-glow-blue {
+    border: 1px solid oklch(var(--brand-blue) / 0.5);
+    box-shadow: 0 0 20px oklch(var(--brand-blue) / 0.15);
+  }
+  .border-glow-purple {
+    border: 1px solid oklch(var(--brand-purple) / 0.6);
+    box-shadow: 0 0 30px oklch(var(--brand-purple) / 0.2);
+  }
+}
